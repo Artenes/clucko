@@ -42,11 +42,19 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun getTimes(): List<String> =
-        db.clockInDao().getAll().map {
+    private fun getTimes(): List<String> {
+        val now = ZonedDateTime.now()
+        val beginOfDay = ZonedDateTime.of(now.year, now.monthValue, now.dayOfMonth, 0, 0, 0, 0, now.zone)
+        val endOfDay = ZonedDateTime.of(now.year, now.monthValue, now.dayOfMonth, 23, 59, 59, 0, now.zone)
+        val startTimestamp = beginOfDay.toInstant().toEpochMilli()
+        val endTimestamp = endOfDay.toInstant().toEpochMilli()
+
+        return db.clockInDao().getInterval(startTimestamp, endTimestamp).map {
             Instant
                 .ofEpochMilli(it)
                 .atZone(ZoneId.systemDefault())
                 .format(DateTimeFormatter.ofPattern("HH:mm"))
         }
+    }
+
 }

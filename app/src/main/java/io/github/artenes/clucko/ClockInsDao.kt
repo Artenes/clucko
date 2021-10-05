@@ -10,6 +10,9 @@ interface ClockInsDao {
     @Query("SELECT * FROM clockins")
     fun getAll(): List<Long>
 
+    @Query("SELECT * FROM clockins WHERE :start <= timestamp AND timestamp <= :end")
+    fun getInterval(start: Long, end: Long): List<Long>
+
     @Insert
     fun insert(timestamp: ClockIn)
 
