@@ -1,40 +1,41 @@
 package io.github.artenes.clucko
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.artenes.clucko.databinding.ActivityMainBinding
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private val model: MainViewModel by viewModels()
 
+    private lateinit var binding: ActivityMainBinding
+
+    private val list = mutableListOf<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        val list = mutableListOf<String>()
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
         list.addAll(model.getTimes())
         val adapter = ClockInsAdapter(list)
-        val rv = findViewById<RecyclerView>(R.id.rvClockIns)
-        rv.adapter = adapter
-        rv.layoutManager = LinearLayoutManager(this)
-
-        findViewById<FloatingActionButton>(R.id.fabClockIn).setOnClickListener {
-
-            //https://www.rockandnull.com/java-time-android/
-            //https://stackoverflow.com/questions/32437550/whats-the-difference-between-instant-and-localdatetime
-            model.putClockIn()
-            list.clear()
-            list.addAll(model.getTimes())
-            adapter.notifyDataSetChanged()
-
-        }
-
+        binding.rvClockIns.adapter = adapter
+        binding.rvClockIns.layoutManager = LinearLayoutManager(this)
+        binding.fabClockIn.setOnClickListener(this)
     }
 
+    override fun onClick(v: View?) {
+        //https://www.rockandnull.com/java-time-android/
+        //https://stackoverflow.com/questions/32437550/whats-the-difference-between-instant-and-localdatetime
+        model.putClockIn()
+        list.clear()
+        list.addAll(model.getTimes())
+        binding.rvClockIns.adapter?.notifyDataSetChanged()
+    }
 }
