@@ -4,22 +4,23 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.time.*
+import dagger.hilt.android.AndroidEntryPoint
+import java.time.Instant
+import java.time.ZoneId
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    @Inject
     lateinit var db: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        db =
-            Room.databaseBuilder(this, AppDatabase::class.java, "cluckodb").allowMainThreadQueries()
-                .fallbackToDestructiveMigration().build()
 
         val list = mutableListOf<String>()
         list.addAll(getTimes())
@@ -44,8 +45,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun getTimes(): List<String> {
         val now = ZonedDateTime.now()
-        val beginOfDay = ZonedDateTime.of(now.year, now.monthValue, now.dayOfMonth, 0, 0, 0, 0, now.zone)
-        val endOfDay = ZonedDateTime.of(now.year, now.monthValue, now.dayOfMonth, 23, 59, 59, 0, now.zone)
+        val beginOfDay =
+            ZonedDateTime.of(now.year, now.monthValue, now.dayOfMonth, 0, 0, 0, 0, now.zone)
+        val endOfDay =
+            ZonedDateTime.of(now.year, now.monthValue, now.dayOfMonth, 23, 59, 59, 0, now.zone)
         val startTimestamp = beginOfDay.toInstant().toEpochMilli()
         val endTimestamp = endOfDay.toInstant().toEpochMilli()
 
