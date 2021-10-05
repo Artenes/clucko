@@ -7,6 +7,10 @@ plugins {
 android {
     compileSdk 30
 
+    buildFeatures {
+        dataBinding true
+    }
+
     defaultConfig {
         applicationId "io.github.artenes.clucko"
         minSdk 24

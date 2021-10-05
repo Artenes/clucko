@@ -4,23 +4,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import io.github.artenes.clucko.databinding.ClockinItemBinding
 
 class ClockInsAdapter(private val dataSet: MutableList<String>) :
     RecyclerView.Adapter<ClockInsAdapter.ViewHolder>() {
 
-    class ViewHolder(root: View) : RecyclerView.ViewHolder(root) {
-        val textView: TextView = root.findViewById(android.R.id.text1)
+    class ViewHolder(private val binding: ClockinItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(clockInText: String, index: Int) {
+            binding.clockIn = clockInText
+            binding.isIn = index % 2 == 0
+            binding.executePendingBindings()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(android.R.layout.simple_list_item_1, parent, false)
-        return ViewHolder(view)
+        val binding: ClockinItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.clockin_item, parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = dataSet[position]
+        holder.bind(dataSet[position], position)
     }
 
     override fun getItemCount(): Int = dataSet.size
