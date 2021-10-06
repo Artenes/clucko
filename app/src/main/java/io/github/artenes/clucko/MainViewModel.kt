@@ -38,7 +38,7 @@ class MainViewModel @Inject constructor(
             val now = Time()
 
             val lastClockIn = dao.getLastClockIn(now.startOfDay(), now.endOfDay())
-            val isIn = lastClockIn.isIn.not()
+            val isIn = lastClockIn?.isIn?.not() ?: true
 
             dao.insert(ClockIn(now, isIn))
         }

@@ -15,6 +15,6 @@ interface ClockInsDao {
     suspend fun insert(timestamp: ClockIn)
 
     @Query("SELECT * FROM clockins WHERE :start <= timestamp AND timestamp <= :end ORDER BY timestamp DESC LIMIT 1")
-    suspend fun getLastClockIn(start: Time, end: Time): ClockIn
+    suspend fun getLastClockIn(start: Time, end: Time): ClockIn?
 
 }
