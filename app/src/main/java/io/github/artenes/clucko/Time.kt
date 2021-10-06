@@ -11,10 +11,16 @@ class Time(epochMilliseconds: Long = Instant.now().toEpochMilli()) {
 
     fun toEpochMilli() = now.toEpochMilli()
 
-    fun getDayIntervalInMilli(): Pair<Long, Long> {
+    fun startOfDay(): Time {
         val today = ZonedDateTime.ofInstant(now, ZoneId.systemDefault())
         val beginOfDay =
             ZonedDateTime.of(today.year, today.monthValue, today.dayOfMonth, 0, 0, 0, 0, today.zone)
+        val startTimestamp = beginOfDay.toInstant().toEpochMilli()
+        return Time(startTimestamp)
+    }
+
+    fun endOfDay(): Time {
+        val today = ZonedDateTime.ofInstant(now, ZoneId.systemDefault())
         val endOfDay =
             ZonedDateTime.of(
                 today.year,
@@ -26,12 +32,19 @@ class Time(epochMilliseconds: Long = Instant.now().toEpochMilli()) {
                 0,
                 today.zone
             )
-        val startTimestamp = beginOfDay.toInstant().toEpochMilli()
         val endTimestamp = endOfDay.toInstant().toEpochMilli()
-        return startTimestamp to endTimestamp
+        return Time(endTimestamp)
     }
 
-    fun getReadableTime(): String =
-        now.atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("HH:mm"))
+    fun format(pattern: String): String =
+        now.atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern(pattern))
+
+    override fun equals(other: Any?): Boolean {
+        return toEpochMilli() == (other as Time).toEpochMilli()
+    }
+
+    override fun hashCode(): Int {
+        return now.toEpochMilli().hashCode()
+    }
 
 }
