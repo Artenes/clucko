@@ -24,16 +24,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         adapter = ClockInsAdapter()
-        adapter.submitList(model.getTimes())
         binding.rvClockIns.adapter = adapter
         binding.rvClockIns.layoutManager = LinearLayoutManager(this)
         binding.fabClockIn.setOnClickListener(this)
+
+        model.clockIns.observe(this) {
+            adapter.submitList(it)
+        }
     }
 
     override fun onClick(v: View?) {
         //https://www.rockandnull.com/java-time-android/
         //https://stackoverflow.com/questions/32437550/whats-the-difference-between-instant-and-localdatetime
         model.putClockIn()
-        adapter.submitList(model.getTimes())
     }
 }

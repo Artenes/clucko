@@ -22,4 +22,9 @@ class DatabaseModule {
             .fallbackToDestructiveMigration()
             .build()
 
+    @Provides
+    fun provideClockInDao(appDatabase: AppDatabase): ClockInsDao {
+        return appDatabase.clockInDao()
+    }
+
 }

@@ -3,6 +3,7 @@ package io.github.artenes.clucko
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ClockInsDao {
@@ -11,7 +12,7 @@ interface ClockInsDao {
     fun getAll(): List<Long>
 
     @Query("SELECT * FROM clockins WHERE :start <= timestamp AND timestamp <= :end")
-    fun getInterval(start: Long, end: Long): List<Long>
+    fun getInterval(start: Long, end: Long): Flow<List<Long>>
 
     @Insert
     fun insert(timestamp: ClockIn)
