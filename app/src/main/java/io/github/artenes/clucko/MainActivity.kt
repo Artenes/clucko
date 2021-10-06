@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.model = model
 
         adapter = ClockInsAdapter()
         binding.rvClockIns.adapter = adapter
@@ -30,6 +31,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         model.clockIns.observe(this) {
             adapter.submitList(it)
+        }
+
+        model.balance.observe(this) {
+            binding.txtBalance.text = it
         }
     }
 
