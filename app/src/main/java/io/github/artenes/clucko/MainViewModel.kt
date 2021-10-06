@@ -12,21 +12,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val dao: ClockInsDao
+    private val dao: ClockInsDao,
 ) : ViewModel() {
 
     val clockIns: LiveData<List<String>>
 
     init {
 
-        val dayInterval = Clock.getDayIntervalInMilli()
+        val dayInterval = Time().getDayIntervalInMilli()
         val liveData = dao.getInterval(dayInterval.first, dayInterval.second).map { list ->
-            list.map {
-                Instant
-                    .ofEpochMilli(it)
-                    .atZone(ZoneId.systemDefault())
-                    .format(DateTimeFormatter.ofPattern("HH:mm"))
-            }
+            list.map { Time(it).getReadableTime() }
         }.asLiveData()
         clockIns = liveData
 
