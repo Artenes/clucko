@@ -3,11 +3,10 @@ package io.github.artenes.clucko
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.map
-import java.time.Instant
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,8 +27,10 @@ class MainViewModel @Inject constructor(
     }
 
     fun putClockIn() {
-        val date = Instant.now()
-        dao.insert(ClockIn(date.toEpochMilli()))
+        viewModelScope.launch {
+            val time = Time().toEpochMilli()
+            dao.insert(ClockIn(time))
+        }
     }
 
 }

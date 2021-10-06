@@ -15,6 +15,6 @@ interface ClockInsDao {
     fun getInterval(start: Long, end: Long): Flow<List<Long>>
 
     @Insert
-    fun insert(timestamp: ClockIn)
+    suspend fun insert(timestamp: ClockIn)
 
 }

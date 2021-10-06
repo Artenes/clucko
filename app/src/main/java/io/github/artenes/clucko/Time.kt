@@ -9,6 +9,8 @@ class Time(epochMilliseconds: Long = Instant.now().toEpochMilli()) {
 
     private val now = Instant.ofEpochMilli(epochMilliseconds)
 
+    fun toEpochMilli() = now.toEpochMilli()
+
     fun getDayIntervalInMilli(): Pair<Long, Long> {
         val today = ZonedDateTime.ofInstant(now, ZoneId.systemDefault())
         val beginOfDay =
