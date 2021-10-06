@@ -28,8 +28,14 @@ class MainViewModel @Inject constructor(
 
     fun putClockIn() {
         viewModelScope.launch {
-            val time = Time().toEpochMilli()
-            dao.insert(ClockIn(time, false))
+            val now = Time()
+            val time = now.toEpochMilli()
+            val dayInterval = now.getDayIntervalInMilli()
+
+            val lastClockIn = dao.getLastClockIn(dayInterval.first, dayInterval.second)
+            val isIn = lastClockIn.isIn.not()
+
+            dao.insert(ClockIn(time, isIn))
         }
     }
 
