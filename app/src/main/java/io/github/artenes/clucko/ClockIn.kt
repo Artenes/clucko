@@ -5,5 +5,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "clockins")
 data class ClockIn(
-    @PrimaryKey val timestamp: Long
+    @PrimaryKey val timestamp: Long,
+    val isIn: Boolean
 )

@@ -14,13 +14,13 @@ class MainViewModel @Inject constructor(
     private val dao: ClockInsDao,
 ) : ViewModel() {
 
-    val clockIns: LiveData<List<String>>
+    val clockIns: LiveData<List<ClockInItem>>
 
     init {
 
         val dayInterval = Time().getDayIntervalInMilli()
         val liveData = dao.getInterval(dayInterval.first, dayInterval.second).map { list ->
-            list.map { Time(it).getReadableTime() }
+            list.map { ClockInItem(it.timestamp, Time(it.timestamp).getReadableTime(), it.isIn) }
         }.asLiveData()
         clockIns = liveData
 
@@ -29,7 +29,7 @@ class MainViewModel @Inject constructor(
     fun putClockIn() {
         viewModelScope.launch {
             val time = Time().toEpochMilli()
-            dao.insert(ClockIn(time))
+            dao.insert(ClockIn(time, false))
         }
     }
 

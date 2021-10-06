@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import io.github.artenes.clucko.databinding.ClockinItemBinding
 
-class ClockInsAdapter() : ListAdapter<String, ClockInsAdapter.ViewHolder>(DiffCallback) {
+class ClockInsAdapter() : ListAdapter<ClockInItem, ClockInsAdapter.ViewHolder>(DiffCallback) {
 
     class ViewHolder(private val binding: ClockinItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(clockInText: String, index: Int) {
-            binding.clockIn = clockInText
-            binding.isIn = index % 2 == 0
+        fun bind(clockInItem: ClockInItem) {
+            binding.clockIn = clockInItem.time
+            binding.isIn = clockInItem.isIn
             binding.executePendingBindings()
         }
     }
@@ -30,17 +30,17 @@ class ClockInsAdapter() : ListAdapter<String, ClockInsAdapter.ViewHolder>(DiffCa
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position), position)
+        holder.bind(getItem(position))
     }
 
     companion object {
 
-        val DiffCallback = object : DiffUtil.ItemCallback<String>() {
-            override fun areItemsTheSame(oldItem: String, newItem: String): Boolean =
+        val DiffCallback = object : DiffUtil.ItemCallback<ClockInItem>() {
+            override fun areItemsTheSame(oldItem: ClockInItem, newItem: ClockInItem): Boolean =
                 oldItem == newItem
 
-            override fun areContentsTheSame(oldItem: String, newItem: String): Boolean =
-                oldItem.contentEquals(newItem)
+            override fun areContentsTheSame(oldItem: ClockInItem, newItem: ClockInItem): Boolean =
+                oldItem.hashCode() == newItem.hashCode()
         }
 
     }
