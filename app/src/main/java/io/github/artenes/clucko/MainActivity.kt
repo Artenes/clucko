@@ -40,6 +40,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         model.left.observe(this) {
             binding.txtLeft.text = it
         }
+
+        model.date.observe(this) {
+            binding.txtDate.text = it
+        }
     }
 
     override fun onClick(v: View?) {

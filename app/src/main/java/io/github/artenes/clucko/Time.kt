@@ -43,6 +43,9 @@ class Time(epochMilliseconds: Long = Instant.now().toEpochMilli()) {
     fun format(pattern: String): String =
         now.atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern(pattern))
 
+    fun toLocalDateFormat(): String =
+        today.format(DateTimeFormatter.ISO_LOCAL_DATE)
+
     override fun equals(other: Any?): Boolean {
         return toEpochMilli() == (other as Time).toEpochMilli()
     }

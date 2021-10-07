@@ -22,9 +22,14 @@ class MainViewModel @Inject constructor(
     val left: LiveData<String>
         get() = _left
 
+    private val _date = MutableLiveData<String>()
+    val date: LiveData<String>
+        get() = _date
+
     init {
 
         val now = Time()
+        _date.value = now.toLocalDateFormat()
         val liveData = dao.getInterval(now.startOfDay(), now.endOfDay())
             .onEach { list ->  updateBalance(list) }
             .map { list -> list.map { ClockInItem(it.timestamp, it.timestamp.format("HH:mm"), it.isIn) } }

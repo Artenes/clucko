@@ -14,6 +14,16 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2021/10/06" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabClockIn"
             android:layout_width="wrap_content"
@@ -31,11 +41,12 @@
             android:id="@+id/rvClockIns"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toTopOf="@+id/fabClockIn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/txtDate" />
 
         <TextView
             android:id="@+id/txtBalance"
@@ -73,6 +84,8 @@
             app:layout_constraintBottom_toTopOf="@+id/txtLeft"
             app:layout_constraintEnd_toEndOf="@+id/txtLeft"
             app:layout_constraintStart_toStartOf="@+id/txtLeft" />
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
