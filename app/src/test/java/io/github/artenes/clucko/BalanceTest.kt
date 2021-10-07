@@ -20,7 +20,7 @@ class BalanceTest {
         val amount = balance.currentBalance()
 
         assertEquals(420, amount.minutes)
-        assertEquals("07:00", amount.format("HH:mm"))
+        assertEquals("07:00", TimeFormatter.toHourMinute(amount))
 
     }
 
@@ -39,7 +39,7 @@ class BalanceTest {
         val amount = balance.currentBalance()
 
         assertEquals(643, amount.minutes)
-        assertEquals("10:43", amount.format("HH:mm"))
+        assertEquals("10:43", TimeFormatter.toHourMinute(amount))
 
     }
 
@@ -55,7 +55,7 @@ class BalanceTest {
         val amount = balance.currentBalance()
 
         assertEquals(64, amount.minutes)
-        assertEquals("01:04", amount.format("HH:mm"))
+        assertEquals("01:04", TimeFormatter.toHourMinute(amount))
 
     }
 
@@ -73,7 +73,7 @@ class BalanceTest {
         val amount = balance.timeLeft()
 
         assertEquals(60, amount.minutes)
-        assertEquals("01:00", amount.format("HH:mm"))
+        assertEquals("01:00", TimeFormatter.toHourMinute(amount))
 
     }
 

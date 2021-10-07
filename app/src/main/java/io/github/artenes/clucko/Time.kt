@@ -40,12 +40,6 @@ class Time(epochMilliseconds: Long = Instant.now().toEpochMilli()) {
         return setHour(23).setMinute(59).setSecond(59)
     }
 
-    fun format(pattern: String): String =
-        now.atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern(pattern))
-
-    fun toLocalDateFormat(): String =
-        today.format(DateTimeFormatter.ISO_LOCAL_DATE)
-
     override fun equals(other: Any?): Boolean {
         return toEpochMilli() == (other as Time).toEpochMilli()
     }

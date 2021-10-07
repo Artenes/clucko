@@ -29,10 +29,10 @@ class MainViewModel @Inject constructor(
     init {
 
         val now = Time()
-        _date.value = now.toLocalDateFormat()
+        _date.value = TimeFormatter.toLocalDateFormat(now)
         val liveData = dao.getInterval(now.startOfDay(), now.endOfDay())
             .onEach { list ->  updateBalance(list) }
-            .map { list -> list.map { ClockInItem(it.timestamp, it.timestamp.format("HH:mm"), it.isIn) } }
+            .map { list -> list.map { ClockInItem(it.timestamp, TimeFormatter.toHourMinute(it.timestamp), it.isIn) } }
             .asLiveData()
         clockIns = liveData
 
@@ -53,8 +53,8 @@ class MainViewModel @Inject constructor(
         val balance = Balance(list)
         val amount = balance.currentBalance()
         val left = balance.timeLeft()
-        _balance.value = amount.format("HH:mm")
-        _left.value = left.format("HH:mm")
+        _balance.value = TimeFormatter.toHourMinute(amount)
+        _left.value = TimeFormatter.toHourMinute(left)
     }
 
 }
