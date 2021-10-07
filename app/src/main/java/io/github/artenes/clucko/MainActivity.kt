@@ -36,6 +36,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         model.balance.observe(this) {
             binding.txtBalance.text = it
         }
+
+        model.left.observe(this) {
+            binding.txtLeft.text = it
+        }
     }
 
     override fun onClick(v: View?) {

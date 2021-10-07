@@ -18,4 +18,12 @@ class Balance(private val list: List<ClockIn>) {
 
     }
 
+    fun timeLeft(): TimeAmount {
+        val balance = currentBalance()
+        val target = 8L * 60L //8 hours
+
+        val left = target - balance.minutes
+        return TimeAmount(left)
+    }
+
 }

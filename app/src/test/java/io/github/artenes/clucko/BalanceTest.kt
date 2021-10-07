@@ -59,4 +59,22 @@ class BalanceTest {
 
     }
 
+    @Test
+    fun timeLeft_getRightTime() {
+
+        val clockIns = listOf(
+            ClockIn(Time().setHour(8).setMinute(0), true),
+            ClockIn(Time().setHour(12).setMinute(0), false),
+            ClockIn(Time().setHour(13).setMinute(0), true),
+            ClockIn(Time().setHour(16).setMinute(0), false)
+        )
+
+        val balance = Balance(clockIns)
+        val amount = balance.timeLeft()
+
+        assertEquals(60, amount.minutes)
+        assertEquals("01:00", amount.format("HH:mm"))
+
+    }
+
 }

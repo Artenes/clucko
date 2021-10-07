@@ -47,7 +47,9 @@ class MainViewModel @Inject constructor(
     private fun updateBalance(list: List<ClockIn>) {
         val balance = Balance(list)
         val amount = balance.currentBalance()
+        val left = balance.timeLeft()
         _balance.value = amount.format("HH:mm")
+        _left.value = left.format("HH:mm")
     }
 
 }
