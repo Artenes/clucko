@@ -45,20 +45,9 @@ class MainViewModel @Inject constructor(
     }
 
     private fun updateBalance(list: List<ClockIn>) {
-
-        val lastIndex = if (list.size % 2 == 0) list.size - 1 else list.size - 2
-
-        var balance = 0L
-        for (index in 0..lastIndex step 2) {
-            val clockOut = list[index + 1].timestamp.toEpochMilli()
-            val clockIn = list[index].timestamp.toEpochMilli()
-            val worked = clockOut - clockIn
-            balance += worked
-        }
-
-        val balanceInMinutes = balance / 1000 / 60
-        _balance.value = balanceInMinutes.toString()
-
+        val balance = Balance(list)
+        val amount = balance.currentBalance()
+        _balance.value = amount.format("HH:mm")
     }
 
 }

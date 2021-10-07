@@ -11,29 +11,20 @@ class Time(epochMilliseconds: Long = Instant.now().toEpochMilli()) {
 
     fun toEpochMilli() = now.toEpochMilli()
 
-    fun startOfDay(): Time {
+    fun setTime(hour: Int, minute: Int, second: Int = 0): Time {
         val today = ZonedDateTime.ofInstant(now, ZoneId.systemDefault())
-        val beginOfDay =
-            ZonedDateTime.of(today.year, today.monthValue, today.dayOfMonth, 0, 0, 0, 0, today.zone)
-        val startTimestamp = beginOfDay.toInstant().toEpochMilli()
-        return Time(startTimestamp)
+        val changedTime =
+            ZonedDateTime.of(today.year, today.monthValue, today.dayOfMonth, hour, minute, second, 0, today.zone)
+        val timestamp = changedTime.toInstant().toEpochMilli()
+        return Time(timestamp)
+    }
+
+    fun startOfDay(): Time {
+        return setTime(0, 0)
     }
 
     fun endOfDay(): Time {
-        val today = ZonedDateTime.ofInstant(now, ZoneId.systemDefault())
-        val endOfDay =
-            ZonedDateTime.of(
-                today.year,
-                today.monthValue,
-                today.dayOfMonth,
-                23,
-                59,
-                59,
-                0,
-                today.zone
-            )
-        val endTimestamp = endOfDay.toInstant().toEpochMilli()
-        return Time(endTimestamp)
+        return setTime(23, 59, 59)
     }
 
     fun format(pattern: String): String =
