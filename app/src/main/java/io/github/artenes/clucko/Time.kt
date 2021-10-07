@@ -12,6 +12,8 @@ class Time(epochMilliseconds: Long = Instant.now().toEpochMilli()) {
 
     fun toEpochMilli() = now.toEpochMilli()
 
+    fun minutesInDay() = today.hour * 60 + today.minute
+
     fun setHour(hour: Int): Time {
         val changedTime = ZonedDateTime.of(today.year, today.monthValue, today.dayOfMonth, hour, today.minute, today.second, today.nano, today.zone)
         val timestamp = changedTime.toInstant().toEpochMilli()

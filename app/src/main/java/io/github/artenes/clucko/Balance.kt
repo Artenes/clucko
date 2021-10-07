@@ -8,8 +8,8 @@ class Balance(private val list: List<ClockIn>) {
 
         var balance = 0L
         for (index in 0..lastIndex step 2) {
-            val clockOut = list[index + 1].timestamp.toEpochMilli()
-            val clockIn = list[index].timestamp.toEpochMilli()
+            val clockOut = list[index + 1].timestamp.minutesInDay()
+            val clockIn = list[index].timestamp.minutesInDay()
             val worked = clockOut - clockIn
             balance += worked
         }

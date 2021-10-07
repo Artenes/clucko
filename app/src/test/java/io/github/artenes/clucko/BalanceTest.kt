@@ -19,7 +19,7 @@ class BalanceTest {
         val balance = Balance(clockIns)
         val amount = balance.currentBalance()
 
-        assertEquals(420, amount.inMinutes())
+        assertEquals(420, amount.minutes)
         assertEquals("07:00", amount.format("HH:mm"))
 
     }
@@ -38,8 +38,24 @@ class BalanceTest {
         val balance = Balance(clockIns)
         val amount = balance.currentBalance()
 
-        assertEquals(643, amount.inMinutes())
+        assertEquals(643, amount.minutes)
         assertEquals("10:43", amount.format("HH:mm"))
+
+    }
+
+    @Test
+    fun currentBalance_getsRightValueWithMillis() {
+
+        val clockIns = listOf(
+            ClockIn(Time(1633609010242), true), //12:16
+            ClockIn(Time(1633612807173), false) //13:20
+        )
+
+        val balance = Balance(clockIns)
+        val amount = balance.currentBalance()
+
+        assertEquals(64, amount.minutes)
+        assertEquals("01:04", amount.format("HH:mm"))
 
     }
 
