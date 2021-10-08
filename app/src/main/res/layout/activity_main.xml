@@ -14,15 +14,16 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <TextView
-            android:id="@+id/txtDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="24dp"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:name="io.github.artenes.clucko.ClockInListFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="2021/10/06" />
+            tools:layout="@layout/fragment_clock_in_list"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabClockIn"
@@ -36,57 +37,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@android:drawable/btn_star_big_on"
             android:importantForAccessibility="no"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvClockIns"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/fabClockIn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtDate" />
-
-        <TextView
-            android:id="@+id/txtBalance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/txtLeft"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rvClockIns"
-            tools:text="07:00"/>
-
-        <TextView
-            android:id="@+id/txtLeft"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="00:15"
-            app:layout_constraintBottom_toBottomOf="@+id/txtBalance"
-            app:layout_constraintEnd_toStartOf="@+id/fabClockIn"
-            app:layout_constraintStart_toEndOf="@+id/txtBalance"
-            app:layout_constraintTop_toTopOf="@+id/txtBalance"
-            tools:text="00:15" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Balance"
-            app:layout_constraintBottom_toTopOf="@+id/txtBalance"
-            app:layout_constraintEnd_toEndOf="@+id/txtBalance"
-            app:layout_constraintStart_toStartOf="@+id/txtBalance" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Left"
-            app:layout_constraintBottom_toTopOf="@+id/txtLeft"
-            app:layout_constraintEnd_toEndOf="@+id/txtLeft"
-            app:layout_constraintStart_toStartOf="@+id/txtLeft" />
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -5,7 +5,6 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.artenes.clucko.databinding.ActivityMainBinding
 
@@ -16,34 +15,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var adapter: ClockInsAdapter
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.model = model
 
-        adapter = ClockInsAdapter()
-        binding.rvClockIns.adapter = adapter
-        binding.rvClockIns.layoutManager = LinearLayoutManager(this)
         binding.fabClockIn.setOnClickListener(this)
-
-        model.clockIns.observe(this) {
-            adapter.submitList(it)
-        }
-
-        model.balance.observe(this) {
-            binding.txtBalance.text = it
-        }
-
-        model.left.observe(this) {
-            binding.txtLeft.text = it
-        }
-
-        model.date.observe(this) {
-            binding.txtDate.text = it
-        }
     }
 
     override fun onClick(v: View?) {
