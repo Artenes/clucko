@@ -26,6 +26,7 @@ class MainViewModel @Inject constructor(
     val date: LiveData<String>
         get() = _date
 
+    //https://www.strv.com/blog/how-to-set-up-dagger-viewmodel-saved-state-module-engineering
     fun init(now: Time) {
 
         _date.value = TimeFormatter.toLocalDateFormat(now)
