@@ -22,6 +22,8 @@ class ClockInListFragment : Fragment() {
     ): View {
         val binding = FragmentClockInListBinding.inflate(inflater, container, false)
 
+        model.init(Time(requireArguments().getLong("time")))
+
         binding.model = model
 
         val adapter = ClockInsAdapter()

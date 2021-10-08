@@ -40,6 +40,8 @@ class Time(epochMilliseconds: Long = Instant.now().toEpochMilli()) {
         return setHour(23).setMinute(59).setSecond(59)
     }
 
+    fun addDays(days: Int): Time = Time(today.plusDays(days.toLong()).toInstant().toEpochMilli())
+
     override fun equals(other: Any?): Boolean {
         return toEpochMilli() == (other as Time).toEpochMilli()
     }

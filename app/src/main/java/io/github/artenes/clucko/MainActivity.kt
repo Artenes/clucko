@@ -3,13 +3,13 @@ package io.github.artenes.clucko
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentActivity
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.artenes.clucko.databinding.ActivityMainBinding
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : FragmentActivity(), View.OnClickListener {
 
     private val model: MainViewModel by viewModels()
 
@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.model = model
+        binding.vpPages.adapter = ClockInPagerAdapter(this, Time())
 
         binding.fabClockIn.setOnClickListener(this)
     }

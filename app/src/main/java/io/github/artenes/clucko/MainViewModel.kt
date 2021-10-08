@@ -12,7 +12,7 @@ class MainViewModel @Inject constructor(
     private val dao: ClockInsDao,
 ) : ViewModel() {
 
-    val clockIns: LiveData<List<ClockInItem>>
+    lateinit var clockIns: LiveData<List<ClockInItem>>
 
     private val _balance = MutableLiveData<String>()
     val balance: LiveData<String>
@@ -26,9 +26,8 @@ class MainViewModel @Inject constructor(
     val date: LiveData<String>
         get() = _date
 
-    init {
+    fun init(now: Time) {
 
-        val now = Time()
         _date.value = TimeFormatter.toLocalDateFormat(now)
         val liveData = dao.getInterval(now.startOfDay(), now.endOfDay())
             .onEach { list ->  updateBalance(list) }
