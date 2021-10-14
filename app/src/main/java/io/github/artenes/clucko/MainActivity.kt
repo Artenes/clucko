@@ -20,9 +20,9 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.model = model
-        val adapter = ClockInPagerAdapter(this, Time())
+        val adapter = ClockInPagerAdapter(this, model)
         binding.vpPages.adapter = adapter
-        binding.vpPages.setCurrentItem(adapter.itemCount / 2, false)
+        binding.vpPages.setCurrentItem(adapter.itemCount - 1, false)
 
         binding.fabClockIn.setOnClickListener(this)
     }

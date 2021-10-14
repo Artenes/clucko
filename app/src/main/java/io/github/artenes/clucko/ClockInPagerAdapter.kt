@@ -7,23 +7,14 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class ClockInPagerAdapter(
     activity: FragmentActivity,
-    private val time: Time
+    private val model: MainViewModel
 ): FragmentStateAdapter(activity) {
 
-    companion object {
-
-        const val SIX_YEARS_RANGE = 2191
-        const val BASE_DAY = 1095
-
-    }
-
-    override fun getItemCount(): Int = SIX_YEARS_RANGE //3 years range from left and right
+    override fun getItemCount(): Int = model.daysCount
 
     override fun createFragment(position: Int): Fragment {
-        val realIndex = position - BASE_DAY
-        val currentTime = time.addDays(realIndex)
         val fragment = ClockInListFragment()
-        fragment.arguments = bundleOf("time" to currentTime.toEpochMilli())
+        fragment.arguments = bundleOf("index" to position)
         return fragment
     }
 

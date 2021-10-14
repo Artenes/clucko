@@ -2,8 +2,6 @@ package io.github.artenes.clucko
 
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -12,31 +10,22 @@ class MainViewModel @Inject constructor(
     private val dao: ClockInsDao,
 ) : ViewModel() {
 
-    lateinit var clockIns: LiveData<List<ClockInItem>>
+    private val days = mutableListOf<ClockInListModel>()
 
-    private val _balance = MutableLiveData<String>()
-    val balance: LiveData<String>
-    get() = _balance
-
-    private val _left = MutableLiveData<String>()
-    val left: LiveData<String>
-        get() = _left
-
-    private val _date = MutableLiveData<String>()
-    val date: LiveData<String>
-        get() = _date
+    val daysCount: Int
+    get() = days.size
 
     //https://www.strv.com/blog/how-to-set-up-dagger-viewmodel-saved-state-module-engineering
-    fun init(now: Time) {
-
-        _date.value = TimeFormatter.toLocalDateFormat(now)
-        val liveData = dao.getInterval(now.startOfDay(), now.endOfDay())
-            .onEach { list ->  updateBalance(list) }
-            .map { list -> list.map { ClockInItem(it.timestamp, TimeFormatter.toHourMinute(it.timestamp), it.isIn) } }
-            .asLiveData()
-        clockIns = liveData
-
+    init {
+        val lastSevenDays = Time().minusDays(6)
+        for(dayCount in 0..6) {
+            val day = lastSevenDays.addDays(dayCount)
+            val itemModel = ClockInListModel(day, dao)
+            days.add(itemModel)
+        }
     }
+
+    fun getItem(index: Int): ClockInListModel = days[index]
 
     fun putClockIn() {
         viewModelScope.launch {
@@ -47,14 +36,6 @@ class MainViewModel @Inject constructor(
 
             dao.insert(ClockIn(now, isIn))
         }
-    }
-
-    private fun updateBalance(list: List<ClockIn>) {
-        val balance = Balance(list)
-        val amount = balance.currentBalance()
-        val left = balance.timeLeft()
-        _balance.value = TimeFormatter.toHourMinute(amount)
-        _left.value = TimeFormatter.toHourMinute(left)
     }
 
 }

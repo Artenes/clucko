@@ -42,6 +42,12 @@ class Time(epochMilliseconds: Long = Instant.now().toEpochMilli()) {
 
     fun addDays(days: Int): Time = Time(today.plusDays(days.toLong()).toInstant().toEpochMilli())
 
+    fun minusDays(days: Int): Time = Time(today.minusDays(days.toLong()).toInstant().toEpochMilli())
+
+    override fun toString(): String {
+        return TimeFormatter.toReadableTime(this)
+    }
+
     override fun equals(other: Any?): Boolean {
         return toEpochMilli() == (other as Time).toEpochMilli()
     }
