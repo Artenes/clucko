@@ -15,6 +15,8 @@ class MainViewModel @Inject constructor(
     val daysCount: Int
     get() = days.size
 
+    var currentIndex: Int
+
     //https://www.strv.com/blog/how-to-set-up-dagger-viewmodel-saved-state-module-engineering
     init {
         val lastSevenDays = Time().minusDays(6)
@@ -23,13 +25,15 @@ class MainViewModel @Inject constructor(
             val itemModel = ClockInListModel(day, dao)
             days.add(itemModel)
         }
+        currentIndex = days.size - 1
     }
 
     fun getItem(index: Int): ClockInListModel = days[index]
 
     fun putClockIn() {
         viewModelScope.launch {
-            val now = Time()
+            val currentDay = days[currentIndex].now
+            val now = Time().setYear(currentDay.year).setMonth(currentDay.month).setDay(currentDay.day)
 
             val lastClockIn = dao.getLastClockIn(now.startOfDay(), now.endOfDay())
             val isIn = lastClockIn?.isIn?.not() ?: true

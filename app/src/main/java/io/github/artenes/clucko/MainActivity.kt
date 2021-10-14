@@ -5,6 +5,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.artenes.clucko.databinding.ActivityMainBinding
 
@@ -22,7 +23,12 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
         binding.model = model
         val adapter = ClockInPagerAdapter(this, model)
         binding.vpPages.adapter = adapter
-        binding.vpPages.setCurrentItem(adapter.itemCount - 1, false)
+        binding.vpPages.setCurrentItem(model.currentIndex, false)
+        binding.vpPages.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                model.currentIndex = position
+            }
+        })
 
         binding.fabClockIn.setOnClickListener(this)
     }
