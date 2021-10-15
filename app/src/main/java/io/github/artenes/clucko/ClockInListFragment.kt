@@ -47,10 +47,12 @@ class ClockInListFragment : Fragment() {
             binding.txtDate.text = it
         }
 
-        item.editClockIn.observe(viewLifecycleOwner) {
-            val intent = Intent(requireContext(), EditClockInActivity::class.java)
-            intent.putExtra("timestamp", it)
-            startActivity(intent)
+        item.editClockIn.observe(viewLifecycleOwner) { event ->
+            event.get()?.let {
+                val intent = Intent(requireContext(), EditClockInActivity::class.java)
+                intent.putExtra("timestamp", it)
+                startActivity(intent)
+            }
         }
 
         return binding.root

@@ -23,8 +23,8 @@ class ClockInListModel(val now: Time, private val dao: ClockInsDao) {
     val date: LiveData<String>
         get() = _date
 
-    private val _editClockIn = MutableLiveData<Long>()
-    val editClockIn: LiveData<Long>
+    private val _editClockIn = MutableLiveData<Event<Long>>()
+    val editClockIn: LiveData<Event<Long>>
         get() = _editClockIn
 
     init {
@@ -49,7 +49,7 @@ class ClockInListModel(val now: Time, private val dao: ClockInsDao) {
             val list = dao.getInterval(now.startOfDay(), now.endOfDay())
             val clockIn = list[index]
             withContext(Dispatchers.Main) {
-                _editClockIn.value = clockIn.timestamp.toEpochMilli()
+                _editClockIn.value = Event(clockIn.timestamp.toEpochMilli())
             }
         }
     }
