@@ -1,6 +1,7 @@
 package io.github.artenes.clucko
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
@@ -19,5 +20,11 @@ interface ClockInsDao {
 
     @Query("SELECT * FROM clockins WHERE :start <= timestamp AND timestamp <= :end ORDER BY timestamp DESC LIMIT 1")
     suspend fun getLastClockIn(start: Time, end: Time): ClockIn?
+
+    @Query("SELECT * FROM clockins WHERE timestamp == :timestamp")
+    suspend fun getClockIn(timestamp: Time): ClockIn
+
+    @Delete
+    suspend fun delete(timestamp: ClockIn)
 
 }
