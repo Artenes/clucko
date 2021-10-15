@@ -3,10 +3,11 @@ package io.github.artenes.clucko
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 
-class ClockInListModel(val now: Time, dao: ClockInsDao) {
+class ClockInListModel(val now: Time, private val dao: ClockInsDao) {
 
     val clockIns: LiveData<List<ClockInItem>>
 
@@ -22,9 +23,13 @@ class ClockInListModel(val now: Time, dao: ClockInsDao) {
     val date: LiveData<String>
         get() = _date
 
+    private val _editClockIn = MutableLiveData<Long>()
+    val editClockIn: LiveData<Long>
+        get() = _editClockIn
+
     init {
         _date.value = TimeFormatter.toLocalDateFormat(now)
-        val liveData = dao.getInterval(now.startOfDay(), now.endOfDay())
+        val liveData = dao.getIntervalAsFlow(now.startOfDay(), now.endOfDay())
             .onEach { list ->  updateBalance(list) }
             .map { list -> list.map { ClockInItem(it.timestamp, TimeFormatter.toHourMinute(it.timestamp), it.isIn) } }
             .asLiveData()
@@ -37,6 +42,16 @@ class ClockInListModel(val now: Time, dao: ClockInsDao) {
         val left = balance.timeLeft()
         _balance.value = TimeFormatter.toHourMinute(amount)
         _left.value = TimeFormatter.toHourMinute(left)
+    }
+
+    fun editClockIn(index: Int) {
+        GlobalScope.launch {
+            val list = dao.getInterval(now.startOfDay(), now.endOfDay())
+            val clockIn = list[index]
+            withContext(Dispatchers.Main) {
+                _editClockIn.value = clockIn.timestamp.toEpochMilli()
+            }
+        }
     }
 
 }

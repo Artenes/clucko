@@ -9,7 +9,10 @@ import kotlinx.coroutines.flow.Flow
 interface ClockInsDao {
 
     @Query("SELECT * FROM clockins WHERE :start <= timestamp AND timestamp <= :end")
-    fun getInterval(start: Time, end: Time): Flow<List<ClockIn>>
+    fun getIntervalAsFlow(start: Time, end: Time): Flow<List<ClockIn>>
+
+    @Query("SELECT * FROM clockins WHERE :start <= timestamp AND timestamp <= :end")
+    fun getInterval(start: Time, end: Time): List<ClockIn>
 
     @Insert
     suspend fun insert(timestamp: ClockIn)

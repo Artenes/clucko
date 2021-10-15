@@ -1,5 +1,6 @@
 package io.github.artenes.clucko
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +27,7 @@ class ClockInListFragment : Fragment() {
         val index = requireArguments().getInt("index")
         val item = model.getItem(index)
 
-        val adapter = ClockInsAdapter()
+        val adapter = ClockInsAdapter(item)
         binding.rvClockIns.adapter = adapter
         binding.rvClockIns.layoutManager = LinearLayoutManager(requireContext())
 
@@ -44,6 +45,12 @@ class ClockInListFragment : Fragment() {
 
         item.date.observe(viewLifecycleOwner) {
             binding.txtDate.text = it
+        }
+
+        item.editClockIn.observe(viewLifecycleOwner) {
+            val intent = Intent(requireContext(), EditClockInActivity::class.java)
+            intent.putExtra("timestamp", it)
+            startActivity(intent)
         }
 
         return binding.root

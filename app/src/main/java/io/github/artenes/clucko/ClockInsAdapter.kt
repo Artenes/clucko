@@ -1,6 +1,7 @@
 package io.github.artenes.clucko
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
@@ -8,15 +9,24 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import io.github.artenes.clucko.databinding.ClockinItemBinding
 
-class ClockInsAdapter() : ListAdapter<ClockInItem, ClockInsAdapter.ViewHolder>(DiffCallback) {
+class ClockInsAdapter(private val model: ClockInListModel) : ListAdapter<ClockInItem, ClockInsAdapter.ViewHolder>(DiffCallback) {
 
-    class ViewHolder(private val binding: ClockinItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ClockinItemBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
         fun bind(clockInItem: ClockInItem) {
             binding.clockIn = clockInItem.time
             binding.isIn = clockInItem.isIn
             binding.executePendingBindings()
         }
+
+        override fun onClick(v: View?) {
+            model.editClockIn(adapterPosition)
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
