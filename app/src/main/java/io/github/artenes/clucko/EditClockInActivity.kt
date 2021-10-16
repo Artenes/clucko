@@ -21,6 +21,9 @@ class EditClockInActivity : AppCompatActivity(), View.OnClickListener {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_clock_in)
 
+        binding.pickerHour.minValue = 0
+        binding.pickerHour.maxValue = 24
+
         val timestamp = intent.getLongExtra("timestamp", 0)
         model.init(timestamp)
 
