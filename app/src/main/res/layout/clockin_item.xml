@@ -44,7 +44,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textClockIn"
             app:layout_constraintTop_toTopOf="@+id/textClockIn"
-            android:src="@{isIn ? @android:drawable/arrow_down_float : @android:drawable/arrow_up_float}" />
+            android:src="@{isIn ? @drawable/icon_clock_in : @drawable/icon_clock_out}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
