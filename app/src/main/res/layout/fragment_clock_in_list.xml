@@ -18,11 +18,11 @@
             android:id="@+id/txtDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/raleway"
             android:textAppearance="?attr/textAppearanceHeadline5"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/view"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="2021/10/06" />
 
@@ -30,53 +30,99 @@
             android:id="@+id/rvClockIns"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="64dp"
+            app:layout_constraintBottom_toTopOf="@+id/view3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+        <LinearLayout
+            android:id="@+id/layoutBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/layoutLeft"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view3">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_semibold"
+                android:text="Balance" />
+
+            <TextView
+                android:id="@+id/txtBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway"
+                tools:text="07:00" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/layoutBalance"
+            app:layout_constraintTop_toBottomOf="@+id/view3">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/raleway_semibold"
+                android:text="Left" />
+
+            <TextView
+                android:id="@+id/txtLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/raleway"
+                android:text="00:15"
+                tools:text="00:15" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="5dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="16dp"
+            android:background="@color/purple_200"
+            app:layout_constraintBottom_toBottomOf="@+id/txtDate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txtDate" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/purple_500"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtDate" />
 
-        <TextView
-            android:id="@+id/txtBalance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway"
+        <View
+            android:id="@+id/view3"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginBottom="100dp"
+            android:background="@color/purple_500"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/txtLeft"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rvClockIns"
-            tools:text="07:00" />
-
-        <TextView
-            android:id="@+id/txtLeft"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway"
-            android:text="00:15"
-            app:layout_constraintBottom_toBottomOf="@+id/txtBalance"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/txtBalance"
-            app:layout_constraintTop_toTopOf="@+id/txtBalance"
-            tools:text="00:15" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway_semibold"
-            android:text="Balance"
-            app:layout_constraintBottom_toTopOf="@+id/txtBalance"
-            app:layout_constraintEnd_toEndOf="@+id/txtBalance"
-            app:layout_constraintStart_toStartOf="@+id/txtBalance" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway_semibold"
-            android:text="Left"
-            app:layout_constraintBottom_toTopOf="@+id/txtLeft"
-            app:layout_constraintEnd_toEndOf="@+id/txtLeft"
-            app:layout_constraintStart_toStartOf="@+id/txtLeft" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
