@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.artenes.clucko.databinding.ActivityEditClockInBinding
@@ -23,12 +22,15 @@ class EditClockInActivity : AppCompatActivity(), View.OnClickListener {
 
         binding.pickerHour.minValue = 0
         binding.pickerHour.maxValue = 24
+        binding.pickerMinute.minValue = 0
+        binding.pickerMinute.maxValue = 59
 
         val timestamp = intent.getLongExtra("timestamp", 0)
         model.init(timestamp)
 
-        model.initialTimeText.observe(this) {
-            binding.editTime.setText(it)
+        model.hourTimeLiveData.observe(this) {
+            binding.pickerHour.value = it.hour
+            binding.pickerMinute.value = it.minute
         }
 
         model.closeEvent.observe(this) { event ->
@@ -37,11 +39,10 @@ class EditClockInActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
 
-        binding.buttonSave.setOnClickListener(this)
+        binding.pickerHour.setOnValueChangedListener { picker, oldVal, newVal -> model.setHour(newVal) }
+        binding.pickerMinute.setOnValueChangedListener { picker, oldVal, newVal -> model.setMinute(newVal) }
 
-        binding.editTime.addTextChangedListener {
-            model.setTime(it.toString())
-        }
+        binding.buttonSave.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {

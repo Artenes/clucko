@@ -8,35 +8,33 @@
         android:layout_height="match_parent"
         tools:context=".EditClockInActivity">
 
-        <EditText
-            android:id="@+id/editTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="time"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <Button
             android:id="@+id/buttonSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:text="Save"
-            app:layout_constraintEnd_toEndOf="@+id/editTime"
-            app:layout_constraintStart_toStartOf="@+id/editTime"
-            app:layout_constraintTop_toBottomOf="@+id/editTime" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pickerHour" />
 
         <NumberPicker
             android:id="@+id/pickerHour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/editTime"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/pickerMinute"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <NumberPicker
+            android:id="@+id/pickerMinute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/pickerHour"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/pickerHour"
+            app:layout_constraintTop_toTopOf="@+id/pickerHour" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

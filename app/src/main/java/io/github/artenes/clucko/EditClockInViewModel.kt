@@ -15,11 +15,11 @@ class EditClockInViewModel @Inject constructor(private val dao: ClockInsDao): Vi
 
     private lateinit var time: Time
 
-    private lateinit var timeText: String
+    private lateinit var hourTime: HourTime
 
-    private val _initialTimeText = MutableLiveData<String>()
-    val initialTimeText: LiveData<String>
-    get() = _initialTimeText
+    private val _hourTimeLiveData = MutableLiveData<HourTime>()
+    val hourTimeLiveData: LiveData<HourTime>
+    get() = _hourTimeLiveData
 
     private val _closeEvent = MutableLiveData<Event<Boolean>>()
     val closeEvent: LiveData<Event<Boolean>>
@@ -27,18 +27,22 @@ class EditClockInViewModel @Inject constructor(private val dao: ClockInsDao): Vi
 
     fun init(timestamp: Long) {
         time = Time(timestamp)
-        _initialTimeText.value = TimeFormatter.toHourMinute(time)
+        hourTime = HourTime(time.hour, time.minute)
+        _hourTimeLiveData.value = hourTime
     }
 
-    fun setTime(time: String) {
-        timeText = time
+    fun setHour(hour: Int) {
+        hourTime = HourTime(hour, hourTime.minute)
+        _hourTimeLiveData.value = hourTime
+    }
+
+    fun setMinute(minute: Int) {
+        hourTime = HourTime(hourTime.hour, minute)
+        _hourTimeLiveData.value = hourTime
     }
 
     fun save() {
-        val parts = timeText.split(":").map { it.toInt() }
-        val hour = parts[0]
-        val minutes = parts[1]
-        val newTime = time.setHour(hour).setMinute(minutes)
+        val newTime = time.setHour(hourTime.hour).setMinute(hourTime.minute)
         viewModelScope.launch {
             val clockIn = dao.getClockIn(time)
             dao.delete(clockIn)

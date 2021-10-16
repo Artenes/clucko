@@ -3,7 +3,6 @@ package io.github.artenes.clucko
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
 
 class Time(epochMilliseconds: Long = Instant.now().toEpochMilli()) {
 
@@ -13,6 +12,8 @@ class Time(epochMilliseconds: Long = Instant.now().toEpochMilli()) {
     val year: Int = today.year
     val month: Int = today.monthValue
     val day: Int = today.dayOfMonth
+    val hour: Int = today.hour
+    val minute: Int = today.minute
 
     fun toEpochMilli() = now.toEpochMilli()
 
