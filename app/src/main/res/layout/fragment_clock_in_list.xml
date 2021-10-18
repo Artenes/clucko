@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        android:background="?attr/colorPrimaryVariant">
 
         <TextView
             android:id="@+id/txtDate"
@@ -123,6 +123,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <include
+            android:id="@+id/viewEmpty"
+            layout="@layout/layout_empty_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/rvClockIns"
+            app:layout_constraintEnd_toEndOf="@+id/rvClockIns"
+            app:layout_constraintStart_toStartOf="@+id/rvClockIns"
+            app:layout_constraintTop_toTopOf="@+id/rvClockIns" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

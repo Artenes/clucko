@@ -33,6 +33,7 @@ class ClockInListFragment : Fragment() {
 
         item.clockIns.observe(viewLifecycleOwner) {
             adapter.submitList(it)
+            binding.viewEmpty.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
         }
 
         item.balance.observe(viewLifecycleOwner) {
