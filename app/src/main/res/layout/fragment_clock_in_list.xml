@@ -134,6 +134,20 @@
             app:layout_constraintStart_toStartOf="@+id/rvClockIns"
             app:layout_constraintTop_toTopOf="@+id/rvClockIns" />
 
+        <ImageView
+            android:id="@+id/imageDayHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txtDate"
+            android:src="@drawable/icon_time"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:importantForAccessibility="no"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

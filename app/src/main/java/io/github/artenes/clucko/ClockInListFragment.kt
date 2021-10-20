@@ -7,13 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.artenes.clucko.databinding.FragmentClockInListBinding
 
 @AndroidEntryPoint
-class ClockInListFragment : Fragment() {
+class ClockInListFragment : Fragment(), View.OnClickListener {
 
     private val model: MainViewModel by activityViewModels()
 
@@ -30,6 +29,8 @@ class ClockInListFragment : Fragment() {
         val adapter = ClockInsAdapter(item)
         binding.rvClockIns.adapter = adapter
         binding.rvClockIns.layoutManager = LinearLayoutManager(requireContext())
+
+        binding.imageDayHours.setOnClickListener(this)
 
         item.clockIns.observe(viewLifecycleOwner) {
             adapter.submitList(it)
@@ -59,4 +60,7 @@ class ClockInListFragment : Fragment() {
         return binding.root
     }
 
+    override fun onClick(v: View?) {
+        startActivity(Intent(requireContext(), EditHoursPerDayActivity::class.java))
+    }
 }

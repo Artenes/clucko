@@ -26,4 +26,9 @@ class DatabaseModule {
         return appDatabase.clockInDao()
     }
 
+    @Singleton
+    @Provides
+    fun providePreferencesRepository(@ApplicationContext context: Context): PreferencesRepository =
+        PreferencesRepository(context)
+
 }

@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Clucko">
         <activity
+            android:name=".EditHoursPerDayActivity"
+            android:exported="true" />
+        <activity
             android:name=".EditClockInActivity"
             android:exported="true" />
         <activity

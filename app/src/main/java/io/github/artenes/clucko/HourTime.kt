@@ -1,6 +1,10 @@
 package io.github.artenes.clucko
 
-data class HourTime(
+class HourTime(
     val hour: Int,
     val minute: Int
-)
+) {
+
+    fun toMinutes() = minute + hour * 60
+
+}
