@@ -31,7 +31,7 @@ class ClockInListModel(val now: Time, private val dao: ClockInsDao) {
         _date.value = TimeFormatter.toLocalDateFormat(now)
         val liveData = dao.getIntervalAsFlow(now.startOfDay(), now.endOfDay())
             .onEach { list ->  updateBalance(list) }
-            .map { list -> list.map { ClockInItem(it.timestamp, TimeFormatter.toHourMinute(it.timestamp), it.isIn) } }
+            .map { list -> list.mapIndexed { index, clockIn -> ClockInItem(clockIn.timestamp, TimeFormatter.toHourMinute(clockIn.timestamp), index % 2 == 0) } }
             .asLiveData()
         clockIns = liveData
     }
