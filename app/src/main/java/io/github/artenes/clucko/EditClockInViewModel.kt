@@ -48,9 +48,21 @@ class EditClockInViewModel @Inject constructor(private val dao: ClockInsDao): Vi
             dao.delete(clockIn)
             val newClockIn = ClockIn(newTime)
             dao.insert(newClockIn)
-            withContext(Dispatchers.Main) {
-                _closeEvent.value = Event(true)
-            }
+            closeView()
+        }
+    }
+
+    fun delete() {
+        viewModelScope.launch {
+            val clockIn = dao.getClockIn(time)
+            dao.delete(clockIn)
+            closeView()
+        }
+    }
+
+    private suspend fun closeView() {
+        withContext(Dispatchers.Main) {
+            _closeEvent.value = Event(true)
         }
     }
 

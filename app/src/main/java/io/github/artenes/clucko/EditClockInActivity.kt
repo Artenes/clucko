@@ -3,13 +3,14 @@ package io.github.artenes.clucko
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.artenes.clucko.databinding.ActivityEditClockInBinding
 
 @AndroidEntryPoint
-class EditClockInActivity : AppCompatActivity(), View.OnClickListener {
+class EditClockInActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClickListener {
 
     private val model: EditClockInViewModel by viewModels()
 
@@ -43,9 +44,20 @@ class EditClockInActivity : AppCompatActivity(), View.OnClickListener {
         binding.pickerMinute.setOnValueChangedListener { picker, oldVal, newVal -> model.setMinute(newVal) }
 
         binding.buttonSave.setOnClickListener(this)
+
+        binding.buttonDelete.setOnClickListener(this)
+        binding.buttonDelete.setOnLongClickListener(this)
     }
 
-    override fun onClick(v: View?) {
-        model.save()
+    override fun onClick(view: View) {
+        when(view.id) {
+            R.id.buttonSave -> model.save()
+            R.id.buttonDelete -> Toast.makeText(this, "Long press to delete", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onLongClick(v: View?): Boolean {
+        model.delete()
+        return true
     }
 }
