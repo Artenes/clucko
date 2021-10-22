@@ -4,10 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 
-class ClockInListModel(val now: Time, private val dao: ClockInsDao) {
+class ClockInListModel(val scope: CoroutineScope, val now: Time, private val dao: ClockInsDao, private val preferences: PreferencesRepository) {
 
     val clockIns: LiveData<List<ClockInItem>>
 
@@ -34,10 +35,28 @@ class ClockInListModel(val now: Time, private val dao: ClockInsDao) {
             .map { list -> list.mapIndexed { index, clockIn -> ClockInItem(clockIn.timestamp, TimeFormatter.toHourMinute(clockIn.timestamp), index % 2 == 0) } }
             .asLiveData()
         clockIns = liveData
+        listenForPreferenceChange()
+    }
+
+    private fun listenForPreferenceChange() {
+        scope.launch {
+            preferences.listenForMinutesPerDay().collect {
+                updateBalanceFromDatabase()
+            }
+        }
+    }
+
+    private fun updateBalanceFromDatabase() {
+        scope.launch(Dispatchers.IO) {
+            val list = dao.getInterval(now.startOfDay(), now.endOfDay())
+            withContext(Dispatchers.Main) {
+                updateBalance(list)
+            }
+        }
     }
 
     private fun updateBalance(list: List<ClockIn>) {
-        val balance = Balance(list)
+        val balance = Balance(list, preferences.minutesPerDay().toMinutes())
         val amount = balance.currentBalance()
         val left = balance.timeLeft()
         _balance.value = TimeFormatter.toHourMinute(amount)

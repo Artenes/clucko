@@ -1,6 +1,6 @@
 package io.github.artenes.clucko
 
-class Balance(private val list: List<ClockIn>) {
+class Balance(private val list: List<ClockIn>, private val minutesPerDay: Int) {
 
     fun currentBalance(): TimeAmount {
 
@@ -20,9 +20,8 @@ class Balance(private val list: List<ClockIn>) {
 
     fun timeLeft(): TimeAmount {
         val balance = currentBalance()
-        val target = 8L * 60L //8 hours
 
-        val left = target - balance.minutes
+        val left = minutesPerDay - balance.minutes
         return TimeAmount(left)
     }
 

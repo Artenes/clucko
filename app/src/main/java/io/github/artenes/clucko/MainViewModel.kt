@@ -8,6 +8,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val dao: ClockInsDao,
+    private val preferences: PreferencesRepository
 ) : ViewModel() {
 
     private val days = mutableListOf<ClockInListModel>()
@@ -22,7 +23,7 @@ class MainViewModel @Inject constructor(
         val lastSevenDays = Time().minusDays(6)
         for(dayCount in 0..6) {
             val day = lastSevenDays.addDays(dayCount)
-            val itemModel = ClockInListModel(day, dao)
+            val itemModel = ClockInListModel(viewModelScope, day, dao, preferences)
             days.add(itemModel)
         }
         currentIndex = days.size - 1
