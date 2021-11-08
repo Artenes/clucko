@@ -2,46 +2,24 @@ package io.github.artenes.clucko
 
 import android.content.Context
 import android.content.SharedPreferences
-import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.*
 
-class PreferencesRepository(context: Context) {
+class PreferencesRepository(context: Context): SharedPreferences.OnSharedPreferenceChangeListener {
 
     private val sharedPreferences =
         context.getSharedPreferences("clucko_preferences", Context.MODE_PRIVATE)
 
-    fun listenForMinutesPerDay(): Flow<HourTime> = callbackFlow {
-
-        val listener = SharedPreferences.OnSharedPreferenceChangeListener { pref, key ->
-            if (key == "minutes_day") {
-                trySend(minutesPerDay())
-            }
-        }
-
-        sharedPreferences.registerOnSharedPreferenceChangeListener(listener)
-
-        awaitClose {
-            sharedPreferences.unregisterOnSharedPreferenceChangeListener(listener)
-        }
-
+    init {
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this)
     }
 
-    fun listenForCurrentDay(): Flow<Time> = callbackFlow {
+    private val _minutesPerDayFlow = MutableStateFlow(minutesPerDay())
+    val minutesPerDayFlow: StateFlow<HourTime>
+        get() = _minutesPerDayFlow
 
-        val listener = SharedPreferences.OnSharedPreferenceChangeListener { pref, key ->
-            if (key == "current_date") {
-                trySend(currentDate())
-            }
-        }
-
-        sharedPreferences.registerOnSharedPreferenceChangeListener(listener)
-
-        awaitClose {
-            sharedPreferences.unregisterOnSharedPreferenceChangeListener(listener)
-        }
-
-    }
+    private val _currentDateFlow = MutableStateFlow(currentDate())
+    val currentDateFlow: StateFlow<Time>
+        get() = _currentDateFlow
 
     fun minutesPerDay(): HourTime {
         val minutesDay = sharedPreferences.getInt("minutes_day", 8 * 60);
@@ -67,4 +45,17 @@ class PreferencesRepository(context: Context) {
         editor.apply()
     }
 
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+
+        if (key == "minutes_day") {
+            _minutesPerDayFlow.value = minutesPerDay()
+            return
+        }
+
+        if (key == "current_date") {
+            _currentDateFlow.value = currentDate()
+            return
+        }
+
+    }
 }

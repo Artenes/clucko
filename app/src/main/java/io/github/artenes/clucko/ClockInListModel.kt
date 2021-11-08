@@ -40,7 +40,7 @@ class ClockInListModel(val scope: CoroutineScope, val now: Time, private val dao
 
     private fun listenForPreferenceChange() {
         scope.launch {
-            preferences.listenForMinutesPerDay().collect {
+            preferences.minutesPerDayFlow.collect {
                 updateBalanceFromDatabase()
             }
         }
