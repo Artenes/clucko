@@ -15,15 +15,6 @@
         tools:context=".MainActivity"
         android:background="?attr/colorPrimaryVariant">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vpPages"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabClockIn"
             android:layout_width="wrap_content"
@@ -36,6 +27,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/icon_finger"
             android:importantForAccessibility="no"/>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView3"
+            android:name="io.github.artenes.clucko.ClockInListFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

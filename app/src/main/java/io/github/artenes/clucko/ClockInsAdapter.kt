@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import io.github.artenes.clucko.databinding.ClockinItemBinding
 
-class ClockInsAdapter(private val model: ClockInListModel) : ListAdapter<ClockInItem, ClockInsAdapter.ViewHolder>(DiffCallback) {
+class ClockInsAdapter(private val model: MainViewModel) : ListAdapter<ClockInItem, ClockInsAdapter.ViewHolder>(DiffCallback) {
 
     inner class ViewHolder(private val binding: ClockinItemBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 

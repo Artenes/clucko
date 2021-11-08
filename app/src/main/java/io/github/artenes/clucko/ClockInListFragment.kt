@@ -23,33 +23,30 @@ class ClockInListFragment : Fragment(), View.OnClickListener {
     ): View {
         val binding = FragmentClockInListBinding.inflate(inflater, container, false)
 
-        val index = requireArguments().getInt("index")
-        val item = model.getItem(index)
-
-        val adapter = ClockInsAdapter(item)
+        val adapter = ClockInsAdapter(model)
         binding.rvClockIns.adapter = adapter
         binding.rvClockIns.layoutManager = LinearLayoutManager(requireContext())
 
         binding.imageDayHours.setOnClickListener(this)
 
-        item.clockIns.observe(viewLifecycleOwner) {
+        model.clockIns.observe(viewLifecycleOwner) {
             adapter.submitList(it)
             binding.viewEmpty.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
         }
 
-        item.balance.observe(viewLifecycleOwner) {
+        model.balance.observe(viewLifecycleOwner) {
             binding.txtBalance.text = it
         }
 
-        item.left.observe(viewLifecycleOwner) {
+        model.left.observe(viewLifecycleOwner) {
             binding.txtLeft.text = it
         }
 
-        item.date.observe(viewLifecycleOwner) {
+        model.date.observe(viewLifecycleOwner) {
             binding.txtDate.text = it
         }
 
-        item.editClockIn.observe(viewLifecycleOwner) { event ->
+        model.editClockIn.observe(viewLifecycleOwner) { event ->
             event.get()?.let {
                 val intent = Intent(requireContext(), EditClockInActivity::class.java)
                 intent.putExtra("timestamp", it)

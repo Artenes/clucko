@@ -10,7 +10,7 @@ class ClockInPagerAdapter(
     private val model: MainViewModel
 ): FragmentStateAdapter(activity) {
 
-    override fun getItemCount(): Int = model.daysCount
+    override fun getItemCount(): Int = 0
 
     override fun createFragment(position: Int): Fragment {
         val fragment = ClockInListFragment()
