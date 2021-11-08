@@ -25,7 +25,6 @@
             app:layout_constraintStart_toEndOf="@+id/view"
             app:layout_constraintTop_toTopOf="parent"
             android:background="?android:attr/selectableItemBackground"
-            android:tooltipText="Edit Current date"
             tools:text="2021/10/06" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -54,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/raleway_semibold"
-                android:text="Balance" />
+                android:text="@string/balance" />
 
             <TextView
                 android:id="@+id/txtBalance"
@@ -82,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/raleway_semibold"
-                android:text="Left" />
+                android:text="@string/left" />
 
             <TextView
                 android:id="@+id/txtLeft"
@@ -90,7 +89,6 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/raleway"
-                android:text="00:15"
                 tools:text="00:15" />
 
         </LinearLayout>
@@ -148,7 +146,6 @@
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            android:tooltipText="Edit Daily workload"
             android:importantForAccessibility="no"/>
 
         <ImageView
@@ -160,7 +157,6 @@
             app:layout_constraintStart_toEndOf="@+id/txtDate"
             app:layout_constraintTop_toTopOf="@+id/txtDate"
             android:src="@drawable/icon_edit"
-            android:tooltipText="Edit Current date"
             android:background="?android:attr/selectableItemBackground"
             android:importantForAccessibility="no"/>
 

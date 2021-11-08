@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="save">Salvar</string>
+    <string name="delete">Deletar</string>
+    <string name="current_date">Data Atual</string>
+    <string name="daily_workload">Carga Horária Diária</string>
+    <string name="edit_current_date">Editar Data Atual</string>
+    <string name="balance">Saldo</string>
+    <string name="left">Restante</string>
+    <string name="edit_daily_workload">Editar Carga Horária</string>
+    <string name="no_work_today">Sem Pontos</string>
+    <string name="register_a_clock_in_to_start_your_working_day">Bata o ponto para começar seu dia de trabalho.</string>
+</resources>

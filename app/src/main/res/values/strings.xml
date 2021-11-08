@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">Clucko</string>
+    <string name="app_name" translatable="false">Clucko</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="current_date">Current Date</string>
+    <string name="daily_workload">Daily workload</string>
+    <string name="edit_current_date">Edit Current date</string>
+    <string name="balance">Balance</string>
+    <string name="left">Left</string>
+    <string name="edit_daily_workload">Edit Daily workload</string>
+    <string name="no_work_today">No work today</string>
+    <string name="register_a_clock_in_to_start_your_working_day">Register a clock in to start your working day.</string>
 </resources>

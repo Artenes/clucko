@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.TooltipCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -31,6 +32,10 @@ class ClockInListFragment : Fragment(), View.OnClickListener {
         binding.imageDayHours.setOnClickListener(this)
         binding.txtDate.setOnClickListener(this)
         binding.iconEdit.setOnClickListener(this)
+
+        TooltipCompat.setTooltipText(binding.txtDate, getString(R.string.edit_current_date))
+        TooltipCompat.setTooltipText(binding.iconEdit, getString(R.string.edit_current_date))
+        TooltipCompat.setTooltipText(binding.imageDayHours, getString(R.string.edit_daily_workload))
 
         model.clockIns.observe(viewLifecycleOwner) {
             adapter.submitList(it)
