@@ -4,6 +4,7 @@ import java.time.Instant
 import java.time.LocalTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
 class TimeFormatter {
 
@@ -19,7 +20,7 @@ class TimeFormatter {
             Instant
                 .ofEpochMilli(time.toEpochMilli())
                 .atZone(ZoneId.systemDefault())
-                .format(DateTimeFormatter.ISO_LOCAL_DATE)
+                .format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
 
         fun toHourMinute(time: Time): String =
             Instant
