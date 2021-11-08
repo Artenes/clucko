@@ -1,4 +1,4 @@
-package io.github.artenes.clucko
+package io.github.artenes.clucko.database
 
 import android.content.Context
 import androidx.room.Room

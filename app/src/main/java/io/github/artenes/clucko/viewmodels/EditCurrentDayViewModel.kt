@@ -1,9 +1,12 @@
-package io.github.artenes.clucko
+package io.github.artenes.clucko.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.github.artenes.clucko.core.Event
+import io.github.artenes.clucko.core.Time
+import io.github.artenes.clucko.database.PreferencesRepository
 import javax.inject.Inject
 
 @HiltViewModel

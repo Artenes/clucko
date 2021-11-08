@@ -1,4 +1,4 @@
-package io.github.artenes.clucko
+package io.github.artenes.clucko.core
 
 import java.time.Instant
 import java.time.ZoneId

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="model"
-            type="io.github.artenes.clucko.MainViewModel" />
+            type="io.github.artenes.clucko.viewmodels.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

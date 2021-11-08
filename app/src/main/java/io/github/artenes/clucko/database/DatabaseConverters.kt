@@ -1,6 +1,7 @@
-package io.github.artenes.clucko
+package io.github.artenes.clucko.database
 
 import androidx.room.TypeConverter
+import io.github.artenes.clucko.core.Time
 
 class DatabaseConverters {
 

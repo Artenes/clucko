@@ -1,4 +1,4 @@
-package io.github.artenes.clucko
+package io.github.artenes.clucko.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +7,8 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.artenes.clucko.viewmodels.EditClockInViewModel
+import io.github.artenes.clucko.R
 import io.github.artenes.clucko.databinding.ActivityEditClockInBinding
 
 @AndroidEntryPoint

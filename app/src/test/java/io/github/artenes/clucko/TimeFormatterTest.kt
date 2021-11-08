@@ -1,5 +1,7 @@
 package io.github.artenes.clucko
 
+import io.github.artenes.clucko.core.TimeAmount
+import io.github.artenes.clucko.core.TimeFormatter
 import org.junit.Assert.*
 import org.junit.Test
 

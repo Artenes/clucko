@@ -1,7 +1,10 @@
-package io.github.artenes.clucko
+package io.github.artenes.clucko.viewmodels
 
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.github.artenes.clucko.core.*
+import io.github.artenes.clucko.database.ClockInsDao
+import io.github.artenes.clucko.database.PreferencesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map

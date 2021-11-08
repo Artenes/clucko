@@ -1,4 +1,4 @@
-package io.github.artenes.clucko
+package io.github.artenes.clucko.views
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,11 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.TooltipCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.artenes.clucko.viewmodels.MainViewModel
+import io.github.artenes.clucko.R
 import io.github.artenes.clucko.databinding.FragmentClockInListBinding
 
 @AndroidEntryPoint

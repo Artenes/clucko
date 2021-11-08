@@ -1,4 +1,4 @@
-package io.github.artenes.clucko
+package io.github.artenes.clucko.views
 
 import android.os.Bundle
 import android.view.View
@@ -6,6 +6,8 @@ import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.artenes.clucko.viewmodels.MainViewModel
+import io.github.artenes.clucko.R
 import io.github.artenes.clucko.databinding.ActivityMainBinding
 
 @AndroidEntryPoint

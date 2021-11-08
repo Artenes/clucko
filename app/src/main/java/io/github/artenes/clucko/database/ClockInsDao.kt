@@ -1,9 +1,11 @@
-package io.github.artenes.clucko
+package io.github.artenes.clucko.database
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import io.github.artenes.clucko.core.Time
+import io.github.artenes.clucko.core.ClockIn
 import kotlinx.coroutines.flow.Flow
 
 @Dao

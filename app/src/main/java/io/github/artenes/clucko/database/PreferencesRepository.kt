@@ -1,7 +1,9 @@
-package io.github.artenes.clucko
+package io.github.artenes.clucko.database
 
 import android.content.Context
 import android.content.SharedPreferences
+import io.github.artenes.clucko.core.Time
+import io.github.artenes.clucko.core.HourTime
 import kotlinx.coroutines.flow.*
 
 class PreferencesRepository(context: Context): SharedPreferences.OnSharedPreferenceChangeListener {

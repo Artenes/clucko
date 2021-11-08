@@ -11,16 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Clucko">
         <activity
-            android:name=".EditCurrentDayActivity"
+            android:name=".views.EditCurrentDayActivity"
             android:exported="false" />
         <activity
-            android:name=".EditHoursPerDayActivity"
-            android:exported="true" />
+            android:name=".views.EditHoursPerDayActivity"
+            android:exported="false" />
         <activity
-            android:name=".EditClockInActivity"
-            android:exported="true" />
+            android:name=".views.EditClockInActivity"
+            android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".views.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

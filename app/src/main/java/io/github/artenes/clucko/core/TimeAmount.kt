@@ -1,4 +1,4 @@
-package io.github.artenes.clucko
+package io.github.artenes.clucko.core
 
 class TimeAmount(val minutes: Long) {
 

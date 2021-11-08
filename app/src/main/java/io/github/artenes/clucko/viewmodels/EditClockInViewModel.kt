@@ -1,10 +1,15 @@
-package io.github.artenes.clucko
+package io.github.artenes.clucko.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.github.artenes.clucko.core.ClockIn
+import io.github.artenes.clucko.core.Event
+import io.github.artenes.clucko.core.HourTime
+import io.github.artenes.clucko.core.Time
+import io.github.artenes.clucko.database.ClockInsDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

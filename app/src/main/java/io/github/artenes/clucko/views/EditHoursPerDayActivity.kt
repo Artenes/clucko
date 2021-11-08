@@ -1,4 +1,4 @@
-package io.github.artenes.clucko
+package io.github.artenes.clucko.views
 
 import android.os.Bundle
 import android.view.View
@@ -6,6 +6,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.artenes.clucko.viewmodels.EditHoursPerDayViewModel
+import io.github.artenes.clucko.R
 import io.github.artenes.clucko.databinding.ActivityEditHoursPerDayBinding
 
 @AndroidEntryPoint

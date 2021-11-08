@@ -1,4 +1,4 @@
-package io.github.artenes.clucko
+package io.github.artenes.clucko.core
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
