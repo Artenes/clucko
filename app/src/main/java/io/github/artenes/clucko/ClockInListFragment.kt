@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +29,8 @@ class ClockInListFragment : Fragment(), View.OnClickListener {
         binding.rvClockIns.layoutManager = LinearLayoutManager(requireContext())
 
         binding.imageDayHours.setOnClickListener(this)
+        binding.txtDate.setOnClickListener(this)
+        binding.iconEdit.setOnClickListener(this)
 
         model.clockIns.observe(viewLifecycleOwner) {
             adapter.submitList(it)
@@ -57,7 +60,10 @@ class ClockInListFragment : Fragment(), View.OnClickListener {
         return binding.root
     }
 
-    override fun onClick(v: View?) {
-        startActivity(Intent(requireContext(), EditHoursPerDayActivity::class.java))
+    override fun onClick(v: View) {
+        when(v.id) {
+            R.id.imageDayHours -> startActivity(Intent(requireContext(), EditHoursPerDayActivity::class.java))
+            else -> startActivity(Intent(requireContext(), EditCurrentDayActivity::class.java))
+        }
     }
 }

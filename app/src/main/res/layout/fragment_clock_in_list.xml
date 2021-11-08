@@ -148,6 +148,17 @@
             android:foreground="?android:attr/selectableItemBackground"
             android:importantForAccessibility="no"/>
 
+        <ImageView
+            android:id="@+id/iconEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtDate"
+            app:layout_constraintStart_toEndOf="@+id/txtDate"
+            app:layout_constraintTop_toTopOf="@+id/txtDate"
+            android:src="@drawable/icon_edit"
+            android:importantForAccessibility="no"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
