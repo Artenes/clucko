@@ -24,6 +24,8 @@
             android:textAppearance="?attr/textAppearanceHeadline5"
             app:layout_constraintStart_toEndOf="@+id/view"
             app:layout_constraintTop_toTopOf="parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:tooltipText="Edit Current date"
             tools:text="2021/10/06" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -146,6 +148,7 @@
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
+            android:tooltipText="Edit Daily workload"
             android:importantForAccessibility="no"/>
 
         <ImageView
@@ -157,6 +160,8 @@
             app:layout_constraintStart_toEndOf="@+id/txtDate"
             app:layout_constraintTop_toTopOf="@+id/txtDate"
             android:src="@drawable/icon_edit"
+            android:tooltipText="Edit Current date"
+            android:background="?android:attr/selectableItemBackground"
             android:importantForAccessibility="no"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
