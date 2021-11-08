@@ -61,10 +61,16 @@ class EditCurrentDayActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         binding.buttonSave.setOnClickListener(this)
+        binding.buttonToday.setOnClickListener(this)
 
     }
 
-    override fun onClick(v: View?) {
-        model.save()
+    override fun onClick(v: View) {
+        if (v.id == R.id.buttonSave) {
+            model.save()
+        } else {
+            model.setAsToday()
+        }
+
     }
 }

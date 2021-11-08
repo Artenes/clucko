@@ -69,6 +69,11 @@ class EditCurrentDayViewModel @Inject constructor(private val preferences: Prefe
         _closeEvent.value = Event(true)
     }
 
+    fun setAsToday() {
+        preferences.setCurrentDate(Time())
+        _closeEvent.value = Event(true)
+    }
+
     private fun updateMaxDay(month: Int) {
         val newMaxDay = getMaxDay(month, now.year)
         if (now.day > newMaxDay) {

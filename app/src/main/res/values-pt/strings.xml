@@ -10,4 +10,5 @@
     <string name="edit_daily_workload">Editar Carga Horária</string>
     <string name="no_work_today">Sem Pontos</string>
     <string name="register_a_clock_in_to_start_your_working_day">Bata o ponto para começar seu dia de trabalho.</string>
+    <string name="today">Hoje</string>
 </resources>
