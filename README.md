@@ -13,7 +13,7 @@ Simple android app to register clock ins and clock outs.
 
 # Vide demo
 
-[Watch demo on youtube](https://youtu.be/zfJPMUP24mk)
+[Watch demo on youtube](https://www.youtube.com/watch?v=UJDdiWI9u2c)
 
 # Features
 
